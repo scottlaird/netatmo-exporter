@@ -11,6 +11,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/xperimental/netatmo-exporter/internal/collector"
 	"github.com/xperimental/netatmo-exporter/internal/config"
+	"github.com/xperimental/netatmo-exporter/internal/web"
 )
 
 var (
@@ -49,6 +50,7 @@ func main() {
 	// Trigger first refresh
 	metrics.RefreshData(time.Now())
 
+	http.Handle("/debug/data", web.DebugHandler(log, client.Read))
 	http.Handle("/metrics", promhttp.HandlerFor(prometheus.DefaultGatherer, promhttp.HandlerOpts{}))
 	http.Handle("/version", versionHandler(log))
 	http.Handle("/", http.RedirectHandler("/metrics", http.StatusFound))
