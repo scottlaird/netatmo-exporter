@@ -24,3 +24,5 @@ require (
 	github.com/prometheus/common v0.31.1 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )
+
+replace github.com/exzz/netatmo-api-go => github.com/xperimental/netatmo-api-go v0.0.0-20211027220552-57282aeec105
